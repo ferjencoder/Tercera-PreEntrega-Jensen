@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Tareas</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-3">Agregar Tarea</button>
+    </form>
+
+    <h3>Lista de Tareas</h3>
+    <ul class="list-group">
+        {% for tarea in tareas %}
+            <li class="list-group-item">
+                {{ tarea.nombre }} - {{ tarea.descripcion }} - {{ tarea.proyecto.nombre }} - {{ tarea.estado }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+

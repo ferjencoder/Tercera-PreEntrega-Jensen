@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Buscar</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" name="search" class="btn btn-primary mt-3">Buscar</button>
+        <button type="submit" name="latest_projects" class="btn btn-secondary mt-3">Mostrar Últimos 5 Proyectos</button>
+    </form>
+
+    {% if results %}
+        <h3>Resultados de la búsqueda</h3>
+        <ul class="list-group">
+            {% for result in results %}
+                <li class="list-group-item">{{ result }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if show_latest_projects and latest_projects_data %}
+        <h3>Últimos 5 Proyectos</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Proyecto</th>
+                    <th>Tareas</th>
+                    <th>Equipo</th>
+                    <th>Miembros del Equipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in latest_projects_data %}
+                    <tr>
+                        <td>{{ data.proyecto.nombre }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for tarea in data.tareas %}
+                                    <li>{{ tarea.nombre }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for equipo in data.equipos %}
+                                    <li>{{ equipo.nombre }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                {% for miembro in data.miembros %}
+                                    <li>{{ miembro.nombre }} {{ miembro.apellido }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

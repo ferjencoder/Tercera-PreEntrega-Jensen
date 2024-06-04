@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Equipos</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-3">Agregar Equipo</button>
+    </form>
+
+    <h3>Lista de Equipos</h3>
+    <ul class="list-group">
+        {% for equipo in equipos %}
+            <li class="list-group-item">{{ equipo.nombre }} - {{ equipo.descripcion }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
