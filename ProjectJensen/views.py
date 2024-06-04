@@ -3,6 +3,7 @@ from .models import Proyecto, Tarea, Equipo, MiembroEquipo
 from .forms import ProyectoForm, TareaForm, EquipoForm, MiembroEquipoForm, SearchForm
 
 
+# Vista principal
 def home(request):
     form = SearchForm()
     results = []
@@ -16,6 +17,7 @@ def home(request):
             search_in = form.cleaned_data.get("search_in")
 
             if "search" in request.POST:
+                # Buscar según la opción seleccionada
                 if search_in == "proyectos":
                     results = Proyecto.objects.filter(
                         nombre__icontains=query
@@ -35,6 +37,7 @@ def home(request):
                         | MiembroEquipo.objects.filter(rol__icontains=query)
                     )
             elif "latest_projects" in request.POST:
+                # Mostrar los últimos 5 proyectos
                 show_latest_projects = True
                 latest_projects = Proyecto.objects.all().order_by("-id")[:5]
                 for proyecto in latest_projects:
@@ -63,6 +66,7 @@ def home(request):
     return render(request, "home.html", context)
 
 
+# Vista para gestionar proyectos
 def proyectos(request):
     if request.method == "POST":
         form = ProyectoForm(request.POST)
@@ -74,6 +78,7 @@ def proyectos(request):
     return render(request, "proyectos.html", {"form": form, "proyectos": proyectos})
 
 
+# Vista para gestionar tareas
 def tareas(request):
     if request.method == "POST":
         form = TareaForm(request.POST)
@@ -85,6 +90,7 @@ def tareas(request):
     return render(request, "tareas.html", {"form": form, "tareas": tareas})
 
 
+# Vista para gestionar equipos
 def equipos(request):
     if request.method == "POST":
         form = EquipoForm(request.POST)
@@ -96,6 +102,7 @@ def equipos(request):
     return render(request, "equipos.html", {"form": form, "equipos": equipos})
 
 
+# Vista para gestionar miembros del equipo
 def miembros_equipo(request):
     if request.method == "POST":
         form = MiembroEquipoForm(request.POST)

@@ -2,17 +2,34 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
+<div class="custom-container custom-container-big">
+    <h2 class="my-4">Cómo Utilizar la Web</h2>
+    
+    <ol class="mb-4">
+        <li class="mb-3"><strong>📋 Crear un Equipo:</strong> En la sección "Equipos", completá el formulario con el nombre y la descripción del nuevo equipo. No te olvides de guardar el equipo!</li>
+        <li class="mb-3"><strong>👥 Agregar Miembros al Equipo:</strong> En la sección "Miembros del Equipo", llená el formulario con el nombre, apellido, rol y el equipo al que pertenecen los nuevos miembros. Guardá a los miembros del equipo.</li>
+        <li class="mb-3"><strong>📅 Crear un Proyecto:</strong> Andá a la sección "Proyectos". Completá el formulario con el nombre, descripción, fecha de inicio y fecha de finalización del nuevo proyecto. Guardá el proyecto.</li>
+        <li class="mb-3"><strong>✅ Agregar Tareas al Proyecto:</strong> En la sección "Tareas", llená el formulario con el nombre, descripción, proyecto al que pertenece, fecha de inicio, fecha de finalización y estado de las nuevas tareas. Guardá las tareas.</li>
+        <li class="mb-3"><strong>🔍 Buscar Proyectos:</strong> Utilizá el formulario de búsqueda en la página de inicio para encontrar proyectos por nombre o descripción.</li>
+    </ol>
+</div>
+<div class="container container-500">
+
     <h2 class="my-4">Buscar</h2>
     <form method="post" class="mb-4">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" name="search" class="btn btn-primary mt-3">Buscar</button>
-        <button type="submit" name="latest_projects" class="btn btn-secondary mt-3">Mostrar Últimos 5 Proyectos</button>
+        <div class="d-grid mt-3">
+            <button type="submit" name="search" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="d-grid mt-3">
+            <button type="submit" name="latest_projects" class="btn btn-secondary">Mostrar últimos 5 Proyectos</button>
+        </div>
     </form>
 
+
     {% if results %}
-        <h3>Resultados de la búsqueda</h3>
+        <h3 class="my-4">Resultados de la búsqueda</h3>
         <ul class="list-group">
             {% for result in results %}
                 <li class="list-group-item">{{ result }}</li>
@@ -21,7 +38,7 @@
     {% endif %}
 
     {% if show_latest_projects and latest_projects_data %}
-        <h3>Últimos 5 Proyectos</h3>
+        <h3 class="my-4">Últimos 5 Proyectos</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Mi css -->
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     
     <title>Gestión de Proyectos | ferJen's Co</title>
 </head>
 <body>
-    <header class="bg-primary text-white p-3">
-        <div class="container">
-            <h1 class="h3">Sistema de Gestión de Proyectos</h1>
-            <nav class="nav">
+
+    <header class="bg-dark text-white p-3">
+
+        <div class="d-flex justify-content-end align-items-center">
+            <i id="dark-mode-icon" class="fas fa-moon" style="cursor: pointer;"></i>
+        </div>
+        
+        <div class="container-big align-items-center justify-content-center">
+            <h1 class="h2">Gestión de Proyectos</h1>
+            <nav class="nav mt-2">
                 <a class="nav-link text-white" href="{% url 'home' %}">Inicio</a>
                 <a class="nav-link text-white" href="{% url 'proyectos' %}">Proyectos</a>
                 <a class="nav-link text-white" href="{% url 'tareas' %}">Tareas</a>
@@ -20,14 +33,37 @@
                 <a class="nav-link text-white" href="{% url 'miembros_equipo' %}">Miembros del Equipo</a>
             </nav>
         </div>
+        
     </header>
-    <main class="container mt-4">
+    
+    <main class="container my-4">
         {% block content %}
         {% endblock %}
     </main>
-    <!-- Bootstrap JS and dependencies -->
+    
+    <footer class="text-white p-3 mt-4">
+        <div class="container text-center">
+            <p>Toy en:</p>
+            <a href="https://github.com/ferjencoder/Tercera-PreEntrega-Jensen" class="text-white mx-2" target="_blank">
+                <i class="fab fa-github fa-2x"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/ferjen/" class="text-white mx-2" target="_blank">
+                <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <a href="https://fernandajensen.netlify.app/" class="text-white mx-2" target="_blank">
+                <i class="fas fa-globe fa-2x"></i>
+            </a>
+            <p class="mt-3 small">© 2024 FerJencoder. Todos los derechos reservados <span class="h5">🤓</span>.</p>
+        </div>
+    </footer>
+    
+    <!-- Scripts de Bootstrap y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+     <!-- Bootstrap Datepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
 </body>
 </html>
